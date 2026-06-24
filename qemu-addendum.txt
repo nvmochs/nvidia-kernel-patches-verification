@@ -1,0 +1,17 @@
+# NVIDIA Grace QEMU (Addendum) Patches
+# Format: COMMIT_SHA | TITLE
+#
+# This list is organized by the same groupings found in
+# the NVIDIA Grace QEMU Software Patches and Configurations Guide Addendum.
+#
+# https://docs.nvidia.com/dccpu/patches-config-guide/index.html
+#
+
+
+# QEMU I/O Virtualization: vEGM
+###############################
+
+32db1b74fb99 | EGM support on virtualization
+
+
+# End of list

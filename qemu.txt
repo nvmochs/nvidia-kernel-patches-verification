@@ -1,0 +1,249 @@
+# NVIDIA Grace QEMU Patches
+# Format: COMMIT_SHA | TITLE
+#
+# This list is organized by the same groupings found in
+# the NVIDIA Grace QEMU Software Patches and Configurations Guide.
+#
+# https://docs.nvidia.com/dccpu/patches-config-guide/index.html
+#
+
+
+# QEMU I/O Virtualization: GPU Passthrough
+##########################################
+
+b64b7ed8bb5d | qom: new object to associate device to NUMA node
+0a5b5acdf2d8 | hw/acpi: Implement the SRAT GI affinity structure
+16c687d84574 | hw/acpi: Fix ordering of BDF in Generic Initiator PCI Device Handle.
+f10104aeae3a | hw/arm/virt: Support larger highmem MMIO regions
+
+
+# QEMU I/O Virtualization: Core SMMU
+####################################
+
+8cba58b57865 | scripts/update-linux-headers: Add iommufd.h
+f7cbfa71303c | linux-headers: Add iommufd.h
+1e09f52f4d1f | vfio/common: Move IOMMU agnostic helpers to a separate file
+77c212599d38 | vfio/common: Propagate KVM_SET_DEVICE_ATTR error if any
+a33832b19485 | vfio/common: Introduce vfio_container_add|del_section_window()
+5621c02d5adf | vfio/common: Extract out vfio_kvm_device_[add/del]_fd
+5456b1867d10 | vfio/pci: Introduce vfio_[attach/detach]_device
+da5ed43299bb | vfio/platform: Use vfio_[attach/detach]_device
+c95d128ee3cf | vfio/ap: Use vfio_[attach/detach]_device
+e08041ece739 | vfio/ccw: Use vfio_[attach/detach]_device
+c8fcb90c9687 | vfio/common: Move VFIO reset handler registration to a group agnostic function
+7103ef7e765d | vfio/common: Introduce a per container device list
+0bddd8802767 | vfio/common: Store the parent container in VFIODevice
+3d779abafe9f | vfio/common: Introduce a global VFIODevice list
+7e63b3113889 | vfio/common: Move legacy VFIO backend code into separate container.c
+6e6d8ac62b5b | backends/iommufd: Introduce the iommufd object
+d6b5c4c1b516 | util/char_dev: Add open_cdev()
+1eae5b7bd3dd | vfio/common: return early if space isn't empty
+5ee3dc7af785 | vfio/iommufd: Implement the iommufd backend
+36e84d0c1710 | vfio/iommufd: Relax assert check for iommufd backend
+714e9affa8ae | vfio/iommufd: Add support for iova_ranges and pgsizes
+4d36ec23a75e | vfio/pci: Extract out a helper vfio_pci_get_pci_hot_reset_info
+c328e7e8ad1c | vfio/pci: Introduce a vfio pci hot reset interface
+96d6f85ff012 | vfio/iommufd: Enable pci hot reset through iommufd cdev interface
+ee42b261b0a2 | vfio/pci: Allow the selection of a given iommu backend
+da3e04b26fd8 | vfio/pci: Make vfio cdev pre-openable by passing a file handle
+a6c50e1c3f8d | vfio/platform: Allow the selection of a given iommu backend
+3016e60f8f71 | vfio/platform: Make vfio cdev pre-openable by passing a file handle
+336f308958d5 | vfio/ap: Allow the selection of a given iommu backend
+5e7ba401b71d | vfio/ap: Make vfio cdev pre-openable by passing a file handle
+e70f971a6c12 | vfio/ccw: Allow the selection of a given iommu backend
+909a6254edaa | vfio/ccw: Make vfio cdev pre-openable by passing a file handle
+4517c33c31d3 | vfio: Make VFIOContainerBase poiner parameter const in VFIOIOMMUOps callbacks
+0970238343af | hw/arm: Activate IOMMUFD for virt machines
+73e2df669335 | kconfig: Activate IOMMUFD for s390x machines
+64ad06f6eba6 | hw/i386: Activate IOMMUFD for q35 machines
+dd2fcb1716be | vfio/pci: Move VFIODevice initializations in vfio_instance_init
+a0cf44c8d618 | vfio/platform: Move VFIODevice initializations in vfio_platform_instance_init
+cbbcc2f1706a | vfio/ap: Move VFIODevice initializations in vfio_ap_instance_init
+c12b55ad6f9d | vfio/ccw: Move VFIODevice initializations in vfio_ccw_instance_init
+6106a329141a | vfio: Introduce a helper function to initialize VFIODevice
+98dad2b01931 | docs/devel: Add VFIO iommufd backend documentation
+1f94b21801b2 | backends: Introduce HostIOMMUDevice abstract
+38998c79a183 | backends/host_iommu_device: Introduce HostIOMMUDeviceCaps
+0533739ecefb | vfio/container: Introduce TYPE_HOST_IOMMU_DEVICE_LEGACY_VFIO device
+9005f9284478 | backends/iommufd: Introduce TYPE_HOST_IOMMU_DEVICE_IOMMUFD[_VFIO] devices
+6f274444c579 | range: Introduce range_get_last_bit()
+d441e05e2603 | vfio/container: Implement HostIOMMUDeviceClass::realize() handler
+42965386ea21 | backends/iommufd: Introduce helper function iommufd_backend_get_device_info()
+930589520128 | vfio/iommufd: Implement HostIOMMUDeviceClass::realize() handler
+ed92ed2d486e | vfio/container: Implement HostIOMMUDeviceClass::get_cap() handler
+63c6e83ec236 | backends/iommufd: Implement HostIOMMUDeviceClass::get_cap() handler
+a7fd91b876fe | vfio: Create host IOMMU device instance
+6c8ed5fea1ff | hw/pci: Introduce helper function pci_device_get_iommu_bus_devfn()
+b025ea6886fb | hw/pci: Introduce pci_device_[set|unset]_iommu_device()
+ee26474daa12 | vfio/pci: Pass HostIOMMUDevice to vIOMMU
+d5fd978d9185 | intel_iommu: Extract out vtd_cap_init() to initialize cap/ecap
+a20910ca3e28 | intel_iommu: Implement [set|unset]_iommu_device() callbacks
+77f6efc0ab93 | intel_iommu: Check compatibility with host IOMMU capabilities
+a84e37af36ca | intel_iommu: Use the latest fault reasons defined by spec
+b291dae33d1d | intel_iommu: Make pasid entry type check accurate
+791346f93d2a | intel_iommu: Add a placeholder variable for scalable mode stage-1 translation
+ad0a7f1e1edb | intel_iommu: Flush stage-2 cache in PASID-selective PASID-based iotlb invalidation
+eda4c9b5b3c4 | intel_iommu: Rename slpte to pte
+eb9da9d26328 | intel_iommu: Implement stage-1 translation
+305e469b7188 | intel_iommu: Check if the input address is canonical
+fed51ee5e02d | intel_iommu: Check stage-1 translation result with interrupt range
+65c4f0999991 | intel_iommu: Set accessed and dirty bits during stage-1 translation
+16d4e418e98f | intel_iommu: Flush stage-1 cache in iotlb invalidation
+6ebe6cf2a066 | intel_iommu: Process PASID-based iotlb invalidation
+1075645d430e | intel_iommu: Add an internal API to find an address space with PASID
+dd8200503e23 | intel_iommu: Add support for PASID-based device IOTLB invalidation
+1ab93575bdcb | intel_iommu: piotlb invalidation should notify unmap
+9609d7101867 | tests/acpi: q35: allow DMAR acpi table changes
+ddd84fd0c1f8 | intel_iommu: Set default aw_bits to 48 starting from QEMU 9.2
+81ab964f2162 | tests/acpi: q35: Update host address width in DMAR
+aa68a9fbdb81 | intel_iommu: Introduce a property x-flts for stage-1 translation
+d9d32478ed45 | intel_iommu: Introduce a property to control FS1GP cap bit setting
+2c746dfe1c69 | tests/qtest: Add intel-iommu test
+5c47679cb6e6 | backends/iommufd: Add a helper to invalidate user-managed HWPT
+98962d629844 | vfio/iommufd: Add properties and handlers to TYPE_HOST_IOMMU_DEVICE_IOMMUFD
+e50a3ead976d | vfio/iommufd: Implement [at|de]tach_hwpt handlers
+1ab3d93fd24b | vfio/iommufd: Save vendor specific device info
+a8d178e1492a | pcie: Add helper to declare PASID capability for a pcie device
+1e82e8a828cf | pcie: Helper functions to check if PASID is enabled
+6a3ae6a2440d | pcie: Helper function to check if ATS is enabled
+dcad6cb2abf4 | pcie: Add a helper to declare the PRI capability for a pcie device
+5be8cf79188a | pcie: Helper functions to check to check if PRI is enabled
+8ff9e1def0ef | pci: Cache the bus mastering status in the device
+042cbc9aec7c | pci: Add an API to get IOMMU's min page size and virtual address width
+7e94e45296d6 | memory: Store user data pointer in the IOMMU notifiers
+a849ff5d6fa9 | pci: Add a pci-level initialization function for IOMMU notifiers
+e9b457500adb | pci: Add a pci-level API for ATS
+f0f37daf8e67 | pci: Add a PCI-level API for PRI
+47a4f6a900e1 | hw/arm/virt-acpi-build: Don't create ITS id mappings by default
+d9e6b8424fd2 | hw/arm/smmu-common: Check SMMU has PCIe Root Complex association
+0e6a5bfb0eb1 | hw/arm/virt-acpi-build: Re-arrange SMMUv3 IORT build
+01e9a18730e6 | hw/arm/virt-acpi-build: Update IORT for multiple smmuv3 devices
+7a276b757026 | hw/arm/virt: Factor out common SMMUV3 dt bindings code
+466197fc7a25 | hw/arm/virt: Add an SMMU_IO_LEN macro
+951bc76fb669 | hw/pci: Introduce pci_setup_iommu_per_bus() for per-bus IOMMU ops retrieval
+66d2f665e163 | hw/arm/virt: Allow user-creatable SMMUv3 dev instantiation
+73d3d0187bc6 | qemu-options.hx: Document the arm-smmuv3 device
+c69520c13d6e | bios-tables-test: Allow for smmuv3 test data.
+3f8cd046c151 | qtest/bios-tables-test: Add tests for legacy smmuv3 and smmuv3 device
+d35146a6606c | qtest/bios-tables-test: Update tables for smmuv3 tests
+3e6ad83f209e | tests/qtest/bios-tables-test: Prepare for _DSM change in the DSDT table
+325aa2d86a20 | hw/pci-host/gpex-acpi: Fix _DSM function 0 support return value
+ccf166d89dcf | tests/qtest/bios-tables-test: Update DSDT blobs after GPEX _DSM change
+f2d31df0d925 | backends/iommufd: Introduce iommufd_backend_alloc_viommu
+cd438bf9bdf7 | backends/iommufd: Introduce iommufd_backend_alloc_vdev
+8d9633f1edbb | hw/arm/smmu-common: Factor out common helper functions and export
+797fffedac93 | hw/arm/smmu-common: Make iommu ops part of SMMUState
+79fcbec80a85 | hw/arm/smmuv3-accel: Introduce smmuv3 accel device
+7d7931257d6f | hw/arm/smmuv3-accel: Initialize shared system address space
+e4eab7d4a148 | hw/pci/pci: Move pci_init_bus_master() after adding device to bus
+84ce97290c19 | hw/pci/pci: Add optional supports_address_space() callback
+d1c585db8bb0 | hw/pci-bridge/pci_expander_bridge: Move TYPE_PXB_PCIE_DEV to header
+c7ecb4cf2e94 | hw/arm/smmuv3-accel: Restrict accelerated SMMUv3 to vfio-pci endpoints with iommufd
+fc6dafb98cec | hw/arm/smmuv3: Implement get_viommu_cap() callback
+703b7b91db06 | hw/arm/smmuv3-accel: Add set/unset_iommu_device callback
+95d855167af4 | hw/arm/smmuv3: propagate smmuv3_cmdq_consume() errors to caller
+2da17a988c2d | hw/arm/smmuv3-accel: Add nested vSTE install/uninstall support
+b6b867b9c16d | hw/arm/smmuv3-accel: Install SMMUv3 GBPA based hwpt
+5c921b29c989 | hw/pci/pci: Introduce a callback to retrieve the MSI doorbell GPA directly
+3558c85392a4 | hw/arm/smmuv3-accel: Implement get_msi_direct_gpa callback
+5ec2700dcbf7 | hw/arm/virt: Set msi-gpa property
+58a789c389cb | hw/arm/smmuv3-accel: Add support to issue invalidation cmd to host
+f577dcdb5c1c | hw/arm/smmuv3: Initialize ID registers early during realize()
+ad32238ad26b | hw/arm/smmuv3-accel: Get host SMMUv3 hw info and validate
+59a5c80623ab | hw/pci-host/gpex: Allow to generate preserve boot config DSM #5
+45c57eaefd4c | hw/arm/virt: Set PCI preserve_config for accel SMMUv3
+b8e196a746eb | tests/qtest/bios-tables-test: Prepare for IORT revison upgrade
+06c0c8fde786 | hw/arm/virt-acpi-build: Add IORT RMR regions to handle MSI nested binding
+f48bddafa251 | tests/qtest/bios-tables-test: Update IORT blobs after revision upgrade
+be0cf3c8f121 | hw/arm/smmuv3: Block migration when accel is enabled
+6cc3a621c6f1 | hw/arm/smmuv3: Add accel property for SMMUv3 device
+bd715ff5bda9 | hw/arm/smmuv3-accel: Add a property to specify RIL support
+f7f5013a55a3 | hw/arm/smmuv3-accel: Add support for ATS
+a015ac990fd3 | hw/arm/smmuv3-accel: Add property to specify OAS bits
+550beca3d7b0 | backends/iommufd: Retrieve PASID width from iommufd_backend_get_device_info()
+22afd9d865cb | backends/iommufd: Add get_pasid_info() callback
+49a2bed19b0e | hw/pci: Add helper to insert PCIe extended capability at a fixed offset
+7d59fa20594e | hw/pci: Factor out common PASID capability initialization
+06b38473cda8 | hw/vfio/pci: Synthesize PASID capability for vfio-pci devices
+b8c6f8a69d27 | hw/arm/smmuv3-accel: Make SubstreamID support configurable
+49f6b93d0752 | linux-headers: Update to Linux v6.19-rc1
+de36da106dcf | hw/vfio: Add helper to retrieve device feature
+8cfaf22668c7 | hw/vfio/region: Create dmabuf for PCI BAR per region
+da02b21cc70e | hw/vfio: sort and validate sparse mmap regions by offset
+c42010197eb9 | vfio: Add Error ** parameter to vfio_region_setup()
+3863e47828d5 | hw/vfio: align mmap to power-of-2 of region size for hugepfnmap
+dc86d4523244 | hw/arm/smmuv3-accel: Check ATS compatibility between host and guest
+9f8a8e0f2c6f | hw/arm/smmuv3-accel: Change "ats" property type to OnOffAuto
+1a76cc39333c | hw/arm/smmuv3-accel: Change "ril" property type to OnOffAuto
+3a3dd64e63dc | qdev: Add a SsidSizeMode property type
+ffded86bdda6 | hw/arm/smmuv3-accel: Change "ssidsize" property type to SsidSizeMode
+d3d2de3d227b | qdev: Add an OasMode property type
+c2ff1305cc7d | hw/arm/smmuv3-accel: Change "oas" property type to OasMode
+af35bc0c146c | qemu-options.hx: Document arm-smmuv3 device's accel properties
+659275f84694 | hw/vfio/iommufd: Control dirty tracking for nesting parent HWPT
+4c7fefc2d043 | hw/arm/smmuv3: Have smmuv3_accel_init() take an Error* parameter
+8addbdb793b7 | hw/arm/smmuv3: Update ATC invalidation check
+6328edbe5d72 | hw/arm/smmuv3: Improve accel SMMUv3 usage documentation
+16c547e9cb91 | hw/arm/smmuv3-accel: Add helper for resolving auto parameters
+7e88c1a9d0f9 | hw/arm/smmuv3-accel: Implement "auto" value for "ats"
+8e0a2aa777f6 | hw/arm/smmuv3-accel: Implement "auto" value for "ril"
+13b941aaff48 | hw/arm/smmuv3-accel: Implement "auto" value for "ssidsize"
+86ec6639b18c | hw/arm/smmuv3-accel: Implement "auto" value for "oas"
+e61f8d1138aa | hw/arm/smmuv3: Set default ats, ril, ssidsize, oas to auto
+1b8c0edfee08 | qemu-options.hx: Support "auto" for accel SMMUv3 properties
+
+
+# QEMU I/O Virtualization: vEVENTQ
+##################################
+
+0885cd5504df | backends/iommufd: Introduce iommufd_backend_alloc_veventq
+674d57bf6e26 | hw/arm/smmuv3-accel: Add viommu free helper
+46f0d4839352 | hw/arm/smmuv3-accel: Allocate vEVENTQ for accelerated SMMUv3 devices
+43585524a7c6 | hw/arm/smmuv3: Introduce a helper function for event propagation
+c0c97fbc6cf7 | hw/arm/smmuv3-accel: Read and propagate host vIOMMU events
+
+
+# QEMU I/O Virtualization: vCMDQ
+################################
+
+3e79b45e0478 | backends/iommufd: Update iommufd_backend_get_device_info
+d2f3b3156dbd | backends/iommufd: Update iommufd_backend_alloc_viommu to allow user ptr
+41dae463f487 | backends/iommufd: Introduce iommufd_backend_alloc_hw_queue
+b391e41e53b5 | backends/iommufd: Introduce iommufd_backend_viommu_mmap
+9e67a50ea91d | system/iommufd: Remove unused viommu pointer from IOMMUFDVeventq
+4912111c682f | hw/arm/smmuv3-accel: Introduce CMDQV ops interface
+bc2fd5ce6ca0 | hw/arm/tegra241-cmdqv: Add Tegra241 CMDQV ops backend stub
+f4ec4767ce0c | hw/arm/smmuv3-accel: Wire CMDQV ops into accel lifecycle
+92e340997f86 | hw/arm/virt: Use stored SMMUv3 device list for IORT build
+61e7de842085 | hw/arm/tegra241-cmdqv: Probe host Tegra241 CMDQV support
+b110918bce7c | hw/arm/tegra241-cmdqv: Implement CMDQV init
+dc5726da05a4 | hw/arm/virt: Link SMMUv3 CMDQV resources to platform bus
+43763a1ab76f | hw/arm/tegra241-cmdqv: Implement CMDQV vIOMMU alloc/free
+ab15bda3ac13 | hw/arm/tegra241-cmdqv: mmap host VINTF Page0 for CMDQV
+ab9ead11f03d | hw/arm/tegra241-cmdqv: Emulate CMDQ-V Config region
+0d06b1cc2050 | hw/arm/tegra241-cmdqv: Emulate VCMDQ register reads
+bbe6bc469a96 | hw/arm/tegra241-cmdqv: Emulate VCMDQ register writes
+68336529877a | hw/arm/tegra241-cmdqv: Allocate HW VCMDQs once configured
+1d0f77535417 | hw/arm/tegra241-cmdqv: Route allocated VCMDQ Page0 accesses to the mmap'd host VINTF page0
+11b9798c7b52 | memory: Allow RAM device regions to skip IOMMU mapping
+5965b81ce283 | hw/arm/tegra241-cmdqv: Use mmap'd host VINTF page0 for virtual VINTF page0
+f8015fe988df | hw/arm/smmuv3-accel: Introduce common helper for veventq read
+1de52612f3ff | hw/arm/tegra241-cmdqv: Read and propagate Tegra241 CMDQV errors
+ae1a6a69c002 | hw/arm/tegra241-cmdqv: Initialize register state on reset
+0552f94fbdb6 | hw/arm/tegra241-cmdqv: Limit queue size based on backend page size
+eb7a06e84240 | hw/arm/smmuv3: Add per-device identifier property
+d3e56703bfc5 | hw/arm/smmuv3-accel: Introduce helper to query CMDQV type
+67dc6a4c911b | hw/arm/virt-acpi: Advertise Tegra241 CMDQV nodes in DSDT
+4435853689e2 | hw/arm/smmuv3-accel: Enforce viommu association when CMDQV is active
+295ca0e14c61 | hw/arm/tegra241-cmdqv: Document the CMDQV design and lifecycle
+fced8da695f9 | hw/arm/smmuv3: Add cmdqv property for SMMUv3 device
+
+
+# QEMU I/O Virtualization: Workarounds
+######################################
+
+70ac94ebadd5 | NVIDIA: SAUCE: hw/acpi/pci.c: preserve generic initiator insertion order
+338211ae1e03 | NVIDIA: SAUCE: Reset gpu_id each time building DSDT
+
+
+# End of list

@@ -1,0 +1,53 @@
+# NVIDIA Grace Libvirt Patches
+# Format: COMMIT_SHA | TITLE
+#
+# This list is organized by the same groupings found in
+# the NVIDIA Grace Libvirt Software Patches and Configurations Guide.
+#
+# https://docs.nvidia.com/dccpu/patches-config-guide/index.html
+#
+
+
+# Libvirt I/O Virtualization: GPU Passthrough
+#############################################
+
+91e1b2cb7cfe | qemu: Add capability for PCI high memory MMIO size
+329afc74b130 | qemu: Add command line support for PCI high memory MMIO size
+431911a8463b | tests: Add pcihole64 test for virt machine
+daccea611d4b | qemu: capabilies: Introduce QEMU_CAPS_ACPI_GENERIC_INITIATOR
+b21822a29c33 | qemu: Allow to define NUMA nodes without memory or CPUs assigned
+82754082768e | conf: Add nodeset attribute to the <acpi> element
+7032eb24e690 | qemu: Validate acpi nodeset
+9c247849335c | qemu: Generate acpi-generic-initiator command from acpi nodeset
+d12d0b160d35 | qemu: Add acpi-generic-initiator unit test
+d983a6bf3bb0 | docs: Document acpi nodeset in hostdev
+
+
+# Libvirt I/O Virtualization: Core SMMU
+#######################################
+
+e70c4d54d365 | conf: Support multiple device-pluggable smmuv3 IOMMUs
+4d6419b286af | qemu: Implement pluggable-device smmuv3
+d97bc25b82d3 | qemu: Format IOMMU devices after controllers
+7b471c563fb4 | tests: qemuxmlconfdata: provide device-pluggable smmuv3 sample XML and CLI args
+45ff1c002629 | tests: tests: add test for a single per-device smmuv3
+da4305b7bc8d | qemu: Use pci_bus to identify multi-smmuv3 model
+fd113055bb17 | qemu: Implement support for associating iommufd to hostdev
+1043e04e17ed | qemu: Introduce privateData for hostdevs
+f91a07d0c8dd | qemu: Support per-process memory accounting for iommufd
+f6230804727d | qemu: open VFIO FDs from libvirt backend
+2f0999a16191 | qemu: open iommufd FD from libvirt backend
+7d2f91f9cb57 | qemu: Update Cgroup, namespace, and seclabel for iommufd
+74fc02d792f7 | tests: qemuxmlconfdata: provide iommufd sample XML and CLI args
+
+
+# Libvirt I/O Virtualization: General Fixes
+###########################################
+
+a64367115015 | util: Fix max socket calculation
+d194f362f342 | qemu_process: Fix FD leak with multiple host devices using IOMMUFD
+f37e14119c25 | iommufd: fix FD leak in case of error
+03f2672ab4ef | qemu: Fix IOMMUFD and VFIO security labels
+
+
+# End of list
